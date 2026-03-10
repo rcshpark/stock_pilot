@@ -1,5 +1,11 @@
 import 'package:ai_news_analyzer/core/const/app_color_const.dart';
 import 'package:ai_news_analyzer/core/const/app_text_style_const.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth/auth_divider.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth/auth_field.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth/auth_primary_button.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth/auth_secondary_button.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth/auth_stat_chip.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth_shell.dart';
 import 'package:ai_news_analyzer/presentation/widgets/email_icon.dart';
 import 'package:ai_news_analyzer/presentation/widgets/lock_icon.dart';
 import 'package:flutter/material.dart';
@@ -11,219 +17,86 @@ class IntroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.darkBackground1,
-              AppColors.darkBackground2,
-              AppColors.darkBackground1,
-            ],
+    final l10n = AppLocalizations.of(context)!;
+
+    return AuthShell(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildHero(l10n),
+          const SizedBox(height: 28),
+          AuthField(
+            hintText: l10n.email,
+            icon: const EmailIcon(),
+            keyboardType: TextInputType.emailAddress,
           ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(height: 80),
-            Text(
-              AppLocalizations.of(context)!.introTitle,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.introTitle,
-            ),
-            Text(
-              AppLocalizations.of(context)!.introSubTitle,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.introSubtitle,
-            ),
-            const SizedBox(height: 50),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.email,
-                  hintStyle: AppTextStyles.greyText,
-                  prefixIcon: const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: EmailIcon(),
-                  ),
-                  filled: true,
-                  fillColor: AppColors.darkBackground2_60,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: AppColors.borderColor,
-                      width: 0.5,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: AppColors.borderColor,
-                      width: 0.5,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: AppColors.borderColor,
-                      width: 0.5,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.password,
-                  hintStyle: AppTextStyles.greyText,
-                  prefixIcon: const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: LockIcon(),
-                  ),
-                  filled: true,
-                  fillColor: AppColors.darkBackground2_60,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: AppColors.borderColor,
-                      width: 0.5,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: AppColors.borderColor,
-                      width: 0.5,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: AppColors.borderColor,
-                      width: 0.5,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            // Login Button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.loginButtonBackground,
-                  minimumSize: const Size(double.infinity, 52),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  shadowColor: AppColors.blueShadow,
-                  elevation: 10,
-                ),
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.flash_on, color: AppColors.white),
-                    const SizedBox(width: 8),
-                    Text(
-                      AppLocalizations.of(context)!.loginToStart,
-                      style: AppTextStyles.loginButtonText,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            // Divider
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          const SizedBox(height: 14),
+          AuthField(
+            hintText: l10n.password,
+            icon: const LockIcon(),
+            obscureText: true,
+          ),
+          const SizedBox(height: 20),
+          AuthPrimaryButton(
+            text: l10n.loginToStart,
+            icon: Icons.auto_awesome_rounded,
+            onPressed: () {},
+          ),
+          const SizedBox(height: 18),
+          AuthDivider(text: l10n.or),
+          const SizedBox(height: 18),
+          AuthSecondaryButton(
+            text: l10n.guestToStart,
+            icon: Icons.arrow_forward_rounded,
+            onPressed: () {},
+          ),
+          const SizedBox(height: 24),
+          Center(
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 6,
               children: [
-                const Expanded(
-                  child: Divider(
-                    color: AppColors.borderColor,
-                    indent: 24,
-                    endIndent: 10,
-                  ),
-                ),
-                Text(
-                  AppLocalizations.of(context)!.or,
-                  style: AppTextStyles.greyText,
-                ),
-                const Expanded(
-                  child: Divider(
-                    color: AppColors.borderColor,
-                    indent: 10,
-                    endIndent: 24,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            // Guest Button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 52),
-                  side: const BorderSide(
-                    color: AppColors.borderColor,
-                    width: 0.5,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.guestToStart,
-                      style: AppTextStyles.guestButtonText,
-                    ),
-                    const SizedBox(width: 8),
-                    const Icon(
-                      Icons.arrow_forward,
-                      color: AppColors.guestButtonText,
-                      size: 16,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            // Sign up
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  AppLocalizations.of(context)!.noAccount,
-                  style: AppTextStyles.greyText,
-                ),
+                Text(l10n.noAccount, style: AppTextStyles.greyText),
                 GestureDetector(
-                  onTap: () {
-                    GoRouter.of(context).push('/signup');
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.signUp,
-                    style: AppTextStyles.accentBlueText,
-                  ),
+                  onTap: () => context.push('/signup'),
+                  child: Text(l10n.signUp, style: AppTextStyles.accentBlueText),
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHero(AppLocalizations l10n) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: AppColors.iconBackground,
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(color: AppColors.panelBorder),
+          ),
+          child: const Text('AI NEWS ANALYZER', style: AppTextStyles.eyebrow),
+        ),
+        const SizedBox(height: 18),
+        Text(l10n.introTitle, style: AppTextStyles.introTitle),
+        const SizedBox(height: 12),
+        Text(l10n.introSubTitle, style: AppTextStyles.introSubtitle),
+        const SizedBox(height: 20),
+        const Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            AuthStatChip(label: 'Bias detection'),
+            AuthStatChip(label: 'Summary snapshots'),
+            AuthStatChip(label: 'Source comparison'),
           ],
         ),
-      ),
+      ],
     );
   }
 }
