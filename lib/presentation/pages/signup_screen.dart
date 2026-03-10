@@ -1,5 +1,10 @@
 import 'package:ai_news_analyzer/core/const/app_color_const.dart';
 import 'package:ai_news_analyzer/core/const/app_text_style_const.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth/auth_divider.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth/auth_field.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth/auth_primary_button.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth/auth_social_button.dart';
+import 'package:ai_news_analyzer/presentation/widgets/auth_shell.dart';
 import 'package:ai_news_analyzer/presentation/widgets/email_icon.dart';
 import 'package:ai_news_analyzer/presentation/widgets/github_icon.dart';
 import 'package:ai_news_analyzer/presentation/widgets/google_icon.dart';
@@ -9,311 +14,145 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  bool agreedToTerms = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.signUp,
-          style: const TextStyle(color: AppColors.white),
-        ),
-        backgroundColor: AppColors.black,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.white),
-          onPressed: () {
-            GoRouter.of(context).pop();
-          },
+    final l10n = AppLocalizations.of(context)!;
+
+    return AuthShell(
+      header: Align(
+        alignment: Alignment.centerLeft,
+        child: IconButton(
+          onPressed: () => context.pop(),
+          style: IconButton.styleFrom(
+            backgroundColor: AppColors.iconBackground,
+            foregroundColor: AppColors.white,
+            side: const BorderSide(color: AppColors.panelBorder),
+            fixedSize: const Size(44, 44),
+          ),
+          icon: const Icon(Icons.arrow_back_rounded),
         ),
       ),
-      body: Container(
-        color: AppColors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      AppColors.darkBackground1,
-                      AppColors.darkBackground2,
-                      AppColors.darkBackground1,
-                    ],
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const SizedBox(height: 12),
-                              Column(
-                                children: [
-                                  _buildSocialLoginButton(
-                                    context,
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.continueWithGoogle,
-                                    const GoogleIcon(),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  _buildSocialLoginButton(
-                                    context,
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.continueWithGithub,
-                                    const GithubIcon(),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 48),
-                              _buildDividerWithText(
-                                AppLocalizations.of(context)!.signUpWithEmail,
-                              ),
-                              const SizedBox(height: 16),
-                              Column(
-                                children: [
-                                  _buildTextInputField(
-                                    context,
-                                    AppLocalizations.of(context)!.name,
-                                    const UserIcon(),
-                                  ),
-                                  const SizedBox(height: 15.994),
-                                  _buildTextInputField(
-                                    context,
-                                    AppLocalizations.of(context)!.email,
-                                    const EmailIcon(),
-                                  ),
-                                  const SizedBox(height: 15.994),
-                                  _buildTextInputField(
-                                    context,
-                                    AppLocalizations.of(context)!.password,
-                                    const LockIcon(),
-                                    obscureText: true,
-                                  ),
-                                  const SizedBox(height: 15.994),
-                                  _buildTextInputField(
-                                    context,
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.confirmPassword,
-                                    const LockIcon(),
-                                    obscureText: true,
-                                  ),
-                                  const SizedBox(height: 15.994),
-                                  _buildTermsAndConditions(context),
-                                  const SizedBox(height: 15.994),
-                                  _buildSignUpButton(context),
-                                ],
-                              ),
-                              const SizedBox(height: 24.001),
-                              _buildLoginPrompt(context),
-                              const SizedBox(height: 24.001),
-                            ],
-                          ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l10n.signUp, style: AppTextStyles.sectionLabel),
+          const SizedBox(height: 8),
+          const Text(
+            'Create your workspace and compare narratives across sources.',
+            style: AppTextStyles.supportingText,
+          ),
+          const SizedBox(height: 24),
+          AuthSocialButton(
+            text: l10n.continueWithGoogle,
+            icon: const GoogleIcon(),
+            onPressed: () {},
+          ),
+          const SizedBox(height: 12),
+          AuthSocialButton(
+            text: l10n.continueWithGithub,
+            icon: const GithubIcon(),
+            onPressed: () {},
+          ),
+          const SizedBox(height: 22),
+          AuthDivider(text: l10n.signUpWithEmail),
+          const SizedBox(height: 22),
+          AuthField(hintText: l10n.name, icon: const UserIcon()),
+          const SizedBox(height: 12),
+          AuthField(
+            hintText: l10n.email,
+            icon: const EmailIcon(),
+            keyboardType: TextInputType.emailAddress,
+          ),
+          const SizedBox(height: 12),
+          AuthField(
+            hintText: l10n.password,
+            icon: const LockIcon(),
+            obscureText: true,
+          ),
+          const SizedBox(height: 12),
+          AuthField(
+            hintText: l10n.confirmPassword,
+            icon: const LockIcon(),
+            obscureText: true,
+          ),
+          const SizedBox(height: 16),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Checkbox(
+                value: agreedToTerms,
+                onChanged: (value) {
+                  setState(() {
+                    agreedToTerms = value ?? false;
+                  });
+                },
+                activeColor: AppColors.buttonBlue,
+                side: const BorderSide(color: AppColors.panelBorder),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Wrap(
+                    children: [
+                      Text(
+                        l10n.agreeTo,
+                        style: AppTextStyles.termsAndConditionsText,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          l10n.termsAndConditions,
+                          style: AppTextStyles.termsAndConditionsLink,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSocialLoginButton(
-    BuildContext context,
-    String text,
-    Widget icon,
-  ) {
-    return Container(
-      height: 53.348,
-      decoration: BoxDecoration(
-        color: AppColors.darkBackground2_60,
-        border: Border.all(color: AppColors.borderColor, width: 0.676),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon,
-            const SizedBox(width: 11.99),
-            Text(text, style: AppTextStyles.socialButtonText),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDividerWithText(String text) {
-    return Row(
-      children: [
-        const Expanded(
-          child: Divider(color: AppColors.borderColor, thickness: 0.676),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 11.99),
-          child: Text(text, style: AppTextStyles.dividerText),
-        ),
-        const Expanded(
-          child: Divider(color: AppColors.borderColor, thickness: 0.676),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTextInputField(
-    BuildContext context,
-    String hintText,
-    Widget icon, {
-    bool obscureText = false,
-  }) {
-    return Container(
-      height: 53.338,
-      decoration: BoxDecoration(
-        color: AppColors.darkBackground2_60, // rgba(24,24,27,0.6)
-        border: Border.all(color: AppColors.borderColor, width: 0.676),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      padding: const EdgeInsets.only(
-        left: 15.99,
-        right: 16,
-      ), // Adjusted left padding to align icon
-      child: Row(
-        children: [
-          icon,
-          const SizedBox(
-            width: 11.99,
-          ), // Add some spacing between icon and text field
-          Expanded(
-            child: TextFormField(
-              obscureText: obscureText,
-              style: AppTextStyles.textInputField,
-              decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: AppTextStyles.hintText,
-                border: InputBorder.none, // Remove default border
-                contentPadding: EdgeInsets.zero, // Remove default padding
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTermsAndConditions(BuildContext context) {
-    bool isChecked = false;
-    return Row(
-      children: [
-        SizedBox(
-          width: 24,
-          height: 24,
-          child: Checkbox(
-            value: isChecked,
-            onChanged: (bool? newValue) {},
-            fillColor: WidgetStateProperty.resolveWith((states) {
-              if (states.contains(WidgetState.selected)) {
-                return AppColors.darkBackground2_60;
-              }
-              return AppColors.darkBackground2_60;
-            }),
-            side: const BorderSide(color: AppColors.borderColor, width: 0.676),
-          ),
-        ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Wrap(
-            children: [
-              Text(
-                AppLocalizations.of(context)!.agreeTo,
-                style: AppTextStyles.termsAndConditionsText,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  AppLocalizations.of(context)!.termsAndConditions,
-                  style: AppTextStyles.termsAndConditionsLink,
-                ),
-              ),
-              Text(
-                AppLocalizations.of(context)!.and,
-                style: AppTextStyles.termsAndConditionsText,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  AppLocalizations.of(context)!.privacyPolicy,
-                  style: AppTextStyles.termsAndConditionsLink,
+                      Text(
+                        l10n.and,
+                        style: AppTextStyles.termsAndConditionsText,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          l10n.privacyPolicy,
+                          style: AppTextStyles.termsAndConditionsLink,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSignUpButton(BuildContext context) {
-    return Container(
-      height: 51.996,
-      decoration: BoxDecoration(
-        color: AppColors.buttonBlue,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
-          BoxShadow(
-            color: AppColors.blueShadow,
-            offset: Offset(0, 10),
-            blurRadius: 15,
-            spreadRadius: -3,
-          ),
-          BoxShadow(
-            color: AppColors.blueShadow,
-            offset: Offset(0, 4),
-            blurRadius: 6,
-            spreadRadius: -4,
+          const SizedBox(height: 20),
+          AuthPrimaryButton(text: l10n.signUpButton, onPressed: () {}),
+          const SizedBox(height: 20),
+          Center(
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 6,
+              children: [
+                Text(
+                  l10n.alreadyHaveAccount,
+                  style: AppTextStyles.loginPromptText,
+                ),
+                GestureDetector(
+                  onTap: () => context.pop(),
+                  child: Text(l10n.login, style: AppTextStyles.loginPromptLink),
+                ),
+              ],
+            ),
           ),
         ],
       ),
-      child: Center(
-        child: Text(
-          AppLocalizations.of(context)!.signUpButton,
-          style: AppTextStyles.socialButtonText,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLoginPrompt(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.alreadyHaveAccount,
-          style: AppTextStyles.loginPromptText,
-        ),
-        GestureDetector(
-          onTap: () {},
-          child: Text(
-            AppLocalizations.of(context)!.login,
-            style: AppTextStyles.loginPromptLink,
-          ),
-        ),
-      ],
     );
   }
 }
