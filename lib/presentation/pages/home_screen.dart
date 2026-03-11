@@ -1,6 +1,7 @@
-import 'package:ai_news_analyzer/core/const/app_color_const.dart';
-import 'package:ai_news_analyzer/core/const/app_text_style_const.dart';
+import 'package:stock_pilot/core/const/app_color_const.dart';
+import 'package:stock_pilot/core/const/app_text_style_const.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -43,6 +44,7 @@ class HomeScreen extends StatelessWidget {
                       summary: 'AI 서버 투자 확대 기대가 반도체 밸류체인 전반으로 확산되고 있습니다.',
                       impact: '+3.1%',
                       tone: _CardTone.positive,
+                      isInteractive: true,
                     ),
                     const SizedBox(height: 12),
                     const _IssueCard(
@@ -106,10 +108,10 @@ class _HomeHeader extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('AI News Analyzer', style: AppTextStyles.eyebrow),
+                  Text('StockPilot', style: AppTextStyles.eyebrow),
                   SizedBox(height: 6),
                   Text(
-                    '국내 경제 뉴스, 투자 관점으로 정리해드립니다.',
+                    '기업 지표를 읽고 투자 판단을 정리하는 파트너',
                     style: AppTextStyles.sectionLabel,
                   ),
                 ],
@@ -140,7 +142,7 @@ class _HomeHeader extends StatelessWidget {
           child: const TextField(
             style: AppTextStyles.textInputField,
             decoration: InputDecoration(
-              hintText: '종목, 이슈, 기사 키워드를 검색하세요',
+              hintText: '기업명 또는 종목코드를 검색하세요',
               hintStyle: AppTextStyles.hintText,
               prefixIcon: Icon(
                 Icons.search_rounded,
@@ -307,6 +309,7 @@ class _IssueCard extends StatelessWidget {
     required this.summary,
     required this.impact,
     required this.tone,
+    this.isInteractive = false,
   });
 
   final String category;
@@ -314,6 +317,7 @@ class _IssueCard extends StatelessWidget {
   final String summary;
   final String impact;
   final _CardTone tone;
+  final bool isInteractive;
 
   @override
   Widget build(BuildContext context) {
@@ -321,7 +325,7 @@ class _IssueCard extends StatelessWidget {
         ? const Color(0xFF0A7A42)
         : const Color(0xFF5B6475);
 
-    return Container(
+    final card = Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: AppColors.panelBackground,
@@ -374,6 +378,16 @@ class _IssueCard extends StatelessWidget {
           Text(summary, style: AppTextStyles.supportingText),
         ],
       ),
+    );
+
+    if (!isInteractive) {
+      return card;
+    }
+
+    return InkWell(
+      onTap: () => context.push('/article-detail'),
+      borderRadius: BorderRadius.circular(24),
+      child: card,
     );
   }
 }

@@ -1,13 +1,13 @@
-import 'package:ai_news_analyzer/core/const/app_color_const.dart';
-import 'package:ai_news_analyzer/core/const/app_text_style_const.dart';
-import 'package:ai_news_analyzer/presentation/widgets/auth/auth_divider.dart';
-import 'package:ai_news_analyzer/presentation/widgets/auth/auth_field.dart';
-import 'package:ai_news_analyzer/presentation/widgets/auth/auth_primary_button.dart';
-import 'package:ai_news_analyzer/presentation/widgets/auth/auth_secondary_button.dart';
-import 'package:ai_news_analyzer/presentation/widgets/auth/auth_stat_chip.dart';
-import 'package:ai_news_analyzer/presentation/widgets/auth_shell.dart';
-import 'package:ai_news_analyzer/presentation/widgets/email_icon.dart';
-import 'package:ai_news_analyzer/presentation/widgets/lock_icon.dart';
+import 'package:stock_pilot/core/const/app_color_const.dart';
+import 'package:stock_pilot/core/const/app_text_style_const.dart';
+import 'package:stock_pilot/presentation/widgets/auth/auth_divider.dart';
+import 'package:stock_pilot/presentation/widgets/auth/auth_field.dart';
+import 'package:stock_pilot/presentation/widgets/auth/auth_primary_button.dart';
+import 'package:stock_pilot/presentation/widgets/auth/auth_secondary_button.dart';
+import 'package:stock_pilot/presentation/widgets/auth/auth_stat_chip.dart';
+import 'package:stock_pilot/presentation/widgets/auth_shell.dart';
+import 'package:stock_pilot/presentation/widgets/email_icon.dart';
+import 'package:stock_pilot/presentation/widgets/lock_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -80,7 +80,7 @@ class IntroScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(999),
             border: Border.all(color: AppColors.panelBorder),
           ),
-          child: const Text('AI NEWS ANALYZER', style: AppTextStyles.eyebrow),
+          child: const Text('STOCKPILOT', style: AppTextStyles.eyebrow),
         ),
         const SizedBox(height: 18),
         Text(l10n.introTitle, style: AppTextStyles.introTitle),
@@ -91,9 +91,9 @@ class IntroScreen extends StatelessWidget {
           spacing: 10,
           runSpacing: 10,
           children: [
-            AuthStatChip(label: 'Bias detection'),
-            AuthStatChip(label: 'Summary snapshots'),
-            AuthStatChip(label: 'Source comparison'),
+            AuthStatChip(label: 'Company search'),
+            AuthStatChip(label: 'Metric snapshots'),
+            AuthStatChip(label: 'AI investment view'),
           ],
         ),
       ],

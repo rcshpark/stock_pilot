@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ai_news_analyzer/core/const/app_icons_const.dart';
+import 'package:stock_pilot/core/const/app_icons_const.dart';
 
 class GoogleIcon extends StatelessWidget {
   const GoogleIcon({super.key});

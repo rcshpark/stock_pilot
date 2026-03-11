@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:ai_news_analyzer/core/const/app_color_const.dart';
+import 'package:stock_pilot/core/const/app_color_const.dart';
 import 'package:flutter/material.dart';
 
 class AuthShell extends StatelessWidget {

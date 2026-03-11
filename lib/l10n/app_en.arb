@@ -1,12 +1,12 @@
 {
   "@@locale": "en",
 
-  "introTitle": "AI-Powered News Analyzer",
+  "introTitle": "Your AI Investment Partner",
   "@introTitle": {
     "description": "Main title shown on the intro screen"
   },
 
-  "introSubTitle": "AI-powered analysis to understand what matters",
+  "introSubTitle": "Search companies, read key metrics, and organize your investment view faster",
   "@introSubTitle": {
     "description": "Subtitle under the intro title"
   },

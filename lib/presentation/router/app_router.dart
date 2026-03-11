@@ -1,6 +1,7 @@
-import 'package:ai_news_analyzer/presentation/pages/home_screen.dart';
-import 'package:ai_news_analyzer/presentation/pages/intro_screen.dart';
-import 'package:ai_news_analyzer/presentation/pages/signup_screen.dart';
+import 'package:stock_pilot/presentation/pages/article_detail_screen.dart';
+import 'package:stock_pilot/presentation/pages/home_screen.dart';
+import 'package:stock_pilot/presentation/pages/intro_screen.dart';
+import 'package:stock_pilot/presentation/pages/signup_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'route_paths.dart';
 import 'route_names.dart';
@@ -24,6 +25,11 @@ class AppRouter {
           path: RoutePaths.home,
           name: RouteNames.home,
           builder: (_, __) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: RoutePaths.articleDetail,
+          name: RouteNames.articleDetail,
+          builder: (_, __) => const ArticleDetailScreen(),
         ),
       ],
     );

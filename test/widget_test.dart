@@ -1,5 +1,5 @@
-import 'package:ai_news_analyzer/main.dart';
-import 'package:ai_news_analyzer/presentation/pages/home_screen.dart';
+import 'package:stock_pilot/main.dart';
+import 'package:stock_pilot/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -8,7 +8,7 @@ void main() {
     await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('AI-Powered News Analyzer'), findsOneWidget);
+    expect(find.text('Your AI Investment Partner'), findsOneWidget);
     expect(find.text('Login to get started'), findsOneWidget);
     expect(find.text('Start as Guest'), findsOneWidget);
   });
@@ -17,9 +17,9 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
     await tester.pumpAndSettle();
 
-    expect(find.text('AI News Analyzer'), findsOneWidget);
+    expect(find.text('StockPilot'), findsOneWidget);
     expect(find.text('오늘의 주요 이슈'), findsOneWidget);
-    expect(find.text('종목, 이슈, 기사 키워드를 검색하세요'), findsOneWidget);
+    expect(find.text('기업명 또는 종목코드를 검색하세요'), findsOneWidget);
     expect(find.text('KOSPI'), findsOneWidget);
     expect(find.text('홈'), findsOneWidget);
     expect(find.text('커뮤니티'), findsOneWidget);

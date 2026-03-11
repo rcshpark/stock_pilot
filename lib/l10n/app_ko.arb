@@ -1,12 +1,12 @@
 {
   "@@locale": "ko",
 
-  "introTitle": "인공지능 기반 뉴스 분석기",
+  "introTitle": "기업 분석을 돕는 AI 투자 파트너",
   "@introTitle": {
     "description": "인트로 화면의 메인 타이틀"
   },
 
-  "introSubTitle": "인공지능 기반 분석을 통해 무엇이 중요한지 파악합니다",
+  "introSubTitle": "검색한 기업의 핵심 지표와 투자 포인트를 빠르게 정리합니다",
   "@introSubTitle": {
     "description": "인트로 화면 타이틀 하단에 표시되는 부제목"
   },

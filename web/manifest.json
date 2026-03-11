@@ -1,11 +1,11 @@
 {
-    "name": "ai_news_analyzer",
-    "short_name": "ai_news_analyzer",
+    "name": "StockPilot",
+    "short_name": "StockPilot",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "StockPilot helps users analyze companies and organize investment decisions.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
