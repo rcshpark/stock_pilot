@@ -40,7 +40,7 @@ class IntroScreen extends StatelessWidget {
           AuthPrimaryButton(
             text: l10n.loginToStart,
             icon: Icons.auto_awesome_rounded,
-            onPressed: () {},
+            onPressed: () => context.go('/home'),
           ),
           const SizedBox(height: 18),
           AuthDivider(text: l10n.or),
@@ -48,7 +48,7 @@ class IntroScreen extends StatelessWidget {
           AuthSecondaryButton(
             text: l10n.guestToStart,
             icon: Icons.arrow_forward_rounded,
-            onPressed: () {},
+            onPressed: () => context.go('/home'),
           ),
           const SizedBox(height: 24),
           Center(
